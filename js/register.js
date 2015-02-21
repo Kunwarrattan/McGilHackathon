@@ -1,14 +1,13 @@
-<script>
+
 function Submit(){
 	var emailRegex = /^[A-Za-z0-9._]*\@[A-Za-z]*\.[A-Za-z]{2,5}$/;
 	var fname = document.form.Name.value,
 		lname = document.form.LastName.value,
-		femail = document.form.Email.value,
-		freemail = document.form.enterEmail.value,
-		fpassword = document.form.Password.value,
-		fmonth = document.form.birthday_month.value,
-		fday = document.form.birthday_day.value,
-		fyear = document.form.birthday_year.value;
+		email = document.form.Email.value,
+		confirmemail = document.form.enterEmail.value,
+		password = document.form.Password.value,
+		confirmpassword = document.form.ConfirmPassword.value
+		
 		
 	if( fname == "" )
    {
@@ -23,65 +22,52 @@ function Submit(){
      return false;
    }
    
-   if (femail == "" )
+   if (email == "" )
 	{
 		document.form.Email.focus();
 		document.getElementById("errorBox").innerHTML = "enter the email";
 		return false;
-	 }else if(!emailRegex.test(femail)){
+	 }else if(!emailRegex.test(email)){
 		document.form.Email.focus();
 		document.getElementById("errorBox").innerHTML = "enter the valid email";
 		return false;
 	 }
 	 
-	  if (freemail == "" )
+	  if (confirmemail == "" )
 	{
 		document.form.enterEmail.focus();
 		document.getElementById("errorBox").innerHTML = "Re-enter the email";
 		return false;
-	 }else if(!emailRegex.test(freemail)){
+	 }else if(!emailRegex.test(confirmemail)){
 		document.form.enterEmail.focus();
 		document.getElementById("errorBox").innerHTML = "Re-enter the valid email";
 		return false;
 	 }
 	 
-	 if(freemail !=  femail){
+	 if(confirmemail !=  email){
 		 document.form.enterEmail.focus();
 		 document.getElementById("errorBox").innerHTML = "emails are not matching, re-enter again";
 		 return false;
 		 }
+	 if(confirmpassword != password)
+	 {
+		 document.form.ConfirmPassword.focus();
+		 document.getElementById("errorBox").innerHTML = "Password do not match!!";
+		 return false;
+	 }
 	 
-	 
-	if(fpassword == "")
+	if(password == "")
 	 {
 		 document.form.Password.focus();
 		 document.getElementById("errorBox").innerHTML = "enter the password";
 		 return false;
 	 }
 	 
-		 if (fmonth == "") {
-        document.form.birthday_month.focus();
-		document.getElementById("errorBox").innerHTML = "select the birthday month";
-        return false;
-     }
-	 if (fday == "") {
-        document.form.birthday_day.focus();
-		document.getElementById("errorBox").innerHTML = "select the birthday day";
-        return false;
-     }
-	 if (fyear == "") {
-        document.form.birthday_year.focus();
-		document.getElementById("errorBox").innerHTML = "select the birthday year";
-        return false;
-     }
-		if(document.form.radiobutton[0].checked == false && document.form.radiobutton[1].checked == false){
-				document.getElementById("errorBox").innerHTML = "select your gender";
-			 return false;
-			}
-		if(fname != '' && lname != '' && femail != '' && freemail != '' && fpassword != '' && fmonth != '' && fday != '' && fyear != ''){
+		
+		
+		if(email != '' && confirmemail != '' && password != '' && confirmpassword != '' ){
 			document.getElementById("errorBox").innerHTML = "form submitted successfully";
 			}
 		  
 }
 
-</script>
