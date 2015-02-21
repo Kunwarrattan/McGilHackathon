@@ -40,6 +40,17 @@ body{
 	padding:5px;
 	font-size:18px;
 	}
+.input_button{
+	width:207px;
+	margin: 20px auto;	
+	text-align: center;
+	font-size:18px;
+	}
+.input_field{
+	width:434px;
+	padding:5px;
+	font-size:18px;
+	}	
 #email_form{
 	clear:both;
 	padding:15px 0 10px 0px;
