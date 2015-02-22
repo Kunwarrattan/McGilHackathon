@@ -4,26 +4,31 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Gieshou</title>
 <link rel="stylesheet" href="../style/frontEnd.css"  >
-<script type="text/javascript" src="../js/register.js"></script>
+<!--<script type="text/javascript" src="../js/register.js"></script>-->
 <script>
 function Submit(){
-	var fname = document.form.Name.value,
+	var PackageName = document.form.Name.value,
 		type = document.form.type.value,
 		location = document.form.location.value,
-		fmonth = document.form.birthday_month.value,
-		fday = document.form.birthday_day.value,
-		fyear = document.form.birthday_year.value;
+		arrival_day = document.form.arrival_day.value,
+		arrival_month = document.form.arrival_month.value,
+		arrival_year = document.form.arrival_year.value,
 		
-	if( fname == "" )
+		date = new Date();
+		
+		console.log("toDay: "+date.getDate());
+		var note = document.form.Note.value;
+		
+	if( PackageName == "" )
    {
      document.form.Name.focus() ;
-	 document.getElementById("errorBox").innerHTML = "enter the Package";
+	 document.getElementById("errorBox").innerHTML = "enter the Package Name";
      return false;
    }
    if( type == "" )
    {
      document.form.type.focus() ;
-	 document.getElementById("errorBox").innerHTML = "enter the type";
+	 document.getElementById("errorBox").innerHTML = "enter the Package type";
      return false;
    }
 
@@ -33,30 +38,30 @@ function Submit(){
 	 document.getElementById("errorBox").innerHTML = "enter the location";
      return false;
    } 
+   
+    if( note == "" )
+   {
+     document.form.location.focus() ;
+	 document.getElementById("errorBox").innerHTML = "enter the notes about package";
+     return false;
+   } 
+   
+   if(arrival_day == '' || arrival_day < date.getDate())
+   {
+	 document.getElementById("errorBox").innerHTML = "Arrival Day should be greater then today";
+     return false;
+   }
+   
+   
+   if(arrival_month == '' || arrival_month < (date.getMonth()+1))
+   {
+	 document.getElementById("errorBox").innerHTML = "Arrival Month should be greater  or equal to this month";
+     return false;
+   }
 	
 	 
-	 
-	
-	if (fmonth == "") {
-        document.form.birthday_month.focus();
-		document.getElementById("errorBox").innerHTML = "select the birthday month";
-        return false;
-     }
-	 if (fday == "") {
-        document.form.birthday_day.focus();
-		document.getElementById("errorBox").innerHTML = "select the birthday day";
-        return false;
-     }
-	 if (fyear == "") {
-        document.form.birthday_year.focus();
-		document.getElementById("errorBox").innerHTML = "select the birthday year";
-        return false;
-     }
-		if(document.form.radiobutton[0].checked == false && document.form.radiobutton[1].checked == false){
-				document.getElementById("errorBox").innerHTML = "select your gender";
-			 return false;
-			}
-		if(fname != '' &&  fmonth != '' && fday != '' && fyear != ''){
+
+		if(PackageName != ''  && note != '' && location != '' && type != '' ){
 			document.getElementById("errorBox").innerHTML = "form submitted successfully";
 			}
 		  
@@ -109,11 +114,11 @@ function Submit(){
 		          <option value="11">11</option>
 		          <option value="12" selected="">12</option>
         	</select>
-        	<select name="timezone">
+        	<select name="Timezone">
         		  <option value="AM">AM</option>
 		          <option value="PM" selected="">PM</option>
         	</select>
-        	<select name ="SPAN">
+        	<select name ="Span">
 		          <option value="+1">+1</option>
 		          <option value="+2">+2</option>
 		          <option value="+3">+3</option>
@@ -126,7 +131,7 @@ function Submit(){
         <h3 class="birthday_title">Package Arrival Date</h3>
       </div>
       <div>
-        <select name="birthday_month" >
+        <select name="arrival_month" >
           <option value="" selected >Month</option>
           <option value="1">Jan</option>
           <option value="2">Feb</option>
@@ -142,7 +147,7 @@ function Submit(){
           <option value="12">Dec</option>
         </select>
         &nbsp;&nbsp;
-        <select name="birthday_day" >
+        <select name="arrival_day" >
           <option value="" selected>Day</option>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -177,10 +182,11 @@ function Submit(){
           <option value="31">31</option>
         </select>
         &nbsp;&nbsp;
-        <select name="birthday_year">
+        <select name="arrival_year">
           <option value="" selected>Year</option>
-          <option value="2013">2016</option>
-          <option value="2012">2015</option>
+          <option value="2016">2016</option>
+          <option value="2015">2015</option>
+		  <option value="2015" selected="">2015</option>
         </select>
       </div>
       
@@ -195,7 +201,7 @@ function Submit(){
 </div>
     <!--form ends--> 
   </div>
-   <div>
+   <div align="center">
   	<form>
   		<input type="button" value="POST" class="input_button">
   		<input type="button" value="DELIVERY" class="input_button">
